@@ -76,7 +76,7 @@
                '(lambda (command)
                   (compilation-start command
                                      nil
-                                     (lambda (mode) (concat "*nosetests*")))))
+                                     (lambda (mode) (concat "*nose2*")))))
              (format
               (concat "%s "
                       (if nose2-use-verbose "-v " "")
@@ -84,37 +84,37 @@
               (nose2-find-test-runner) args where where tnames)))
   )
 
-(defun nose2tests-all (&optional debug failed)
+(defun nose2-all (&optional debug failed)
   "run all tests"
   (interactive)
   (run-nose2 nil debug failed))
 
-(defun nose2tests-failed (&optional debug)
+(defun nose2-failed (&optional debug)
   (interactive)
-  (nose2tests-all debug t))
+  (nose2-all debug t))
 
-(defun nose2tests-pdb-all ()
+(defun nose2-pdb-all ()
   (interactive)
-  (nose2tests-all t))
+  (nose2-all t))
 
-(defun nose2tests-module (&optional debug)
-  "run nose2tests (via eggs/bin/test) on current buffer"
+(defun nose2-module (&optional debug)
+  "run nose2 (via eggs/bin/test) on current buffer"
   (interactive)
   (run-nose2 buffer-file-name debug))
 
-(defun nose2tests-pdb-module ()
+(defun nose2-pdb-module ()
   (interactive)
-  (nose2tests-module t))
+  (nose2-module t))
 
-(defun nose2tests-one (&optional debug)
-  "run nose2tests (via eggs/bin/test) on testable thing
+(defun nose2-one (&optional debug)
+  "run nose2 (via eggs/bin/test) on testable thing
  at point in current buffer"
   (interactive)
   (run-nose2 (format "%s:%s" buffer-file-name (nose2-py-testable)) debug))
 
-(defun nose2tests-pdb-one ()
+(defun nose2-pdb-one ()
   (interactive)
-  (nose2tests-one t))
+  (nose2-one t))
 
 (defun nose2-find-test-runner ()
   (message
